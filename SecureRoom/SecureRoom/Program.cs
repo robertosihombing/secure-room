@@ -7,7 +7,6 @@ using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.NetduinoPlus;
 using Bansky.SPOT.Mail;
-using PirSensorExample;
 
 namespace SecureRoom
 {

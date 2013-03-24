@@ -2,7 +2,7 @@ using System;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 
-namespace PirSensorExample
+namespace SecureRoom
 {
     public delegate void PirTriggeredEventHandler(bool triggered, DateTime time);
 
