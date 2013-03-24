@@ -35,17 +35,17 @@ namespace SecureRoom
         {
             onBoardLed.Write(true);
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("pshchegolevatykh.test@yandex.ru", "Pavel Shchegolevatykh");
-            message.To.Add(new MailAddress("79056511516@sms.beemail.ru", "Pavel Shchegolevatykh"));
+            message.From = new MailAddress("yourmail.test@yourserver.com", "Pavel Shchegolevatykh");
+            message.To.Add(new MailAddress("yournumber@sms.beemail.ru", "Pavel Shchegolevatykh"));
             message.Subject = "Dangerous activity";
             message.Body = "There are some dangerous activity in your secure room!";
             message.IsBodyHtml = false;
-            SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 25);
+            SmtpClient smtp = new SmtpClient("smtp.yoursever.com", 25);
             try
             {
                 smtp.Authenticate = true;
-                smtp.Username = "pshchegolevatykh.test";
-                smtp.Password = "masterkey";
+                smtp.Username = "yourname";
+                smtp.Password = "yourpassword";
                 smtp.Send(message);
             }
             catch (SmtpException e)
