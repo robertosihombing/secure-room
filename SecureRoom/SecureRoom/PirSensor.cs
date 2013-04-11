@@ -12,6 +12,16 @@ namespace SecureRoom
 
         public event PirTriggeredEventHandler SensorTriggered;
 
+        public void EnableInterrupt()
+        {
+            sensor.EnableInterrupt();
+        }
+
+        public void DiableInterrupt()
+        {
+            sensor.DisableInterrupt();
+        }
+
         public PirSensor(Cpu.Pin pinNumber)
         {
             sensor =

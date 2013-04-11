@@ -13,10 +13,11 @@ namespace SecureRoom
     public class Program
     {
         private static OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);
+        private static PirSensor pir = new PirSensor(Pins.GPIO_PIN_D0);
 
         public static void Main()
         {
-            PirSensor pir = new PirSensor(Pins.GPIO_PIN_D0);
+            Timer interruptTimer = new Timer(OnInterruptTimer, null, 0, 60000);
             pir.SensorTriggered += OnSensorTriggered;
 
             while (true)
@@ -25,25 +26,30 @@ namespace SecureRoom
             }
         }
 
-        static void OnSensorTriggered(bool triggered, DateTime time)
+        private static void OnInterruptTimer(Object state)
         {
-            SendEmail();
+            pir.EnableInterrupt();
         }
 
-        public static void SendEmail()
+        private static void OnSensorTriggered(bool triggered, DateTime time)
+        {
+            SendEmail(time);
+        }
+
+        public static void SendEmail(DateTime time)
         {
             onBoardLed.Write(true);
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("yourmail.test@yourserver.com", "Pavel Shchegolevatykh");
+            message.From = new MailAddress("yourmail.test@yandex.ru", "Pavel Shchegolevatykh");
             message.To.Add(new MailAddress("yournumber@sms.beemail.ru", "Pavel Shchegolevatykh"));
-            message.Subject = "Dangerous activity";
-            message.Body = "There are some dangerous activity in your secure room!";
+            message.Subject = "Room Activity Dectected";
+            message.Body = "Some movements in your secure room! Time: " + time.ToString() + ".";
             message.IsBodyHtml = false;
-            SmtpClient smtp = new SmtpClient("smtp.yoursever.com", 25);
+            SmtpClient smtp = new SmtpClient("smtp.yourserver.com", 25);
             try
             {
                 smtp.Authenticate = true;
-                smtp.Username = "yourname";
+                smtp.Username = "yourusername";
                 smtp.Password = "yourpassword";
                 smtp.Send(message);
             }
@@ -55,6 +61,7 @@ namespace SecureRoom
             finally
             {
                 smtp.Dispose();
+                pir.DiableInterrupt();
             }
             onBoardLed.Write(false);
         }
