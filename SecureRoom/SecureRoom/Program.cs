@@ -17,6 +17,9 @@ namespace SecureRoom
 
         public static void Main()
         {
+            bool timeUpdated = Ntp.UpdateTimeFromNtpServer("time.nist.gov", 4); // UTC + 4 = Moscow time
+            Debug.Print(timeUpdated ? "Time successfully updated." : "Time was not updated.");
+ 
             Timer interruptTimer = new Timer(OnInterruptTimer, null, 0, 60000);
             pir.SensorTriggered += OnSensorTriggered;
 
@@ -40,7 +43,7 @@ namespace SecureRoom
         {
             onBoardLed.Write(true);
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("yourmail.test@yandex.ru", "Pavel Shchegolevatykh");
+            message.From = new MailAddress("yourmail@yandex.ru", "Pavel Shchegolevatykh");
             message.To.Add(new MailAddress("yournumber@sms.beemail.ru", "Pavel Shchegolevatykh"));
             message.Subject = "Room Activity Dectected";
             message.Body = "Some movements in your secure room! Time: " + time.ToString() + ".";
@@ -49,7 +52,7 @@ namespace SecureRoom
             try
             {
                 smtp.Authenticate = true;
-                smtp.Username = "yourusername";
+                smtp.Username = "yourname";
                 smtp.Password = "yourpassword";
                 smtp.Send(message);
             }
