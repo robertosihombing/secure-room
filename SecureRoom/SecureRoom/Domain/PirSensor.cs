@@ -2,7 +2,7 @@ using System;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 
-namespace SecureRoom
+namespace SecureRoom.Domain
 {
     public delegate void PirTriggeredEventHandler(bool triggered, DateTime time);
 
@@ -17,7 +17,7 @@ namespace SecureRoom
             sensor.EnableInterrupt();
         }
 
-        public void DiableInterrupt()
+        public void DisableInterrupt()
         {
             sensor.DisableInterrupt();
         }

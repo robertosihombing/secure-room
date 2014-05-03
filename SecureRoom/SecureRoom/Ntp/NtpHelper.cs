@@ -1,13 +1,11 @@
 using System;
 using Microsoft.SPOT;
+using System.Net;
+using System.Net.Sockets;
 
-namespace SecureRoom
+namespace SecureRoom.Ntp
 {
-    using System;
-    using System.Net;
-    using System.Net.Sockets;
-
-    public static class Ntp
+    public static class NtpHelper
     {
         public static bool UpdateTimeFromNtpServer(string server, int timeZoneOffset)
         {
