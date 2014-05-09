@@ -8,11 +8,16 @@ using SecureRoom.Exceptions;
 
 namespace SecureRoom.Storage
 {
+    /// <summary>
+    /// Common microSD storage implementation for both SMS and Email messages
+    /// </summary>
     public class MicroSdMessageQueueRepository : IMessageQueueRepository
     {
         private readonly string queueFilePath;
         private readonly IMessageParser messageParser;
-
+        
+        // There is no hard dependecy on actual parser
+        // repository could work with any file formats: CSV, JSON, XML, etc.
         public MicroSdMessageQueueRepository(string queueFilePath, IMessageParser messageParser)
         {
             this.queueFilePath = queueFilePath;

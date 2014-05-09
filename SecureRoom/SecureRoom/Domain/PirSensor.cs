@@ -6,10 +6,16 @@ namespace SecureRoom.Domain
 {
     public delegate void PirTriggeredEventHandler(bool triggered, DateTime time);
 
+    /// <summary>
+    /// PIR Sensor wrapper for encapsulation lowlevel code
+    /// </summary>
     public class PirSensor
     {
         private InterruptPort sensor;
 
+        /// <summary>
+        /// Event for movement detection
+        /// </summary>
         public event PirTriggeredEventHandler SensorTriggered;
 
         public void EnableInterrupt()
@@ -22,6 +28,10 @@ namespace SecureRoom.Domain
             sensor.DisableInterrupt();
         }
 
+        /// <summary>
+        /// PIR object constructor
+        /// </summary>
+        /// <param name="pinNumber">Number of digital pin that connected to PIR sensor</param>
         public PirSensor(Cpu.Pin pinNumber)
         {
             sensor =

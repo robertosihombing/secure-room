@@ -3,6 +3,9 @@ using Microsoft.SPOT;
 
 namespace SecureRoom.Config
 {
+    /// <summary>
+    /// All the options in one place
+    /// </summary>
     public static class Settings
     {
         private static readonly string phoneNumber = "+79056511516";
@@ -13,14 +16,17 @@ namespace SecureRoom.Config
         private static readonly int smtpPort = 587;
         private static readonly string smtpUsername = "secure.room";
         private static readonly string smtpPassword = "bluesky";
+        // most reliable server for now, could be changed
         private static readonly string ntpServerAddress = "time.nist.gov";
         // UTC + 4 = Moscow time
         private static readonly int utcTimeShift = 4;
+        // 2 mins for interruptions and 4 mins for message queue
         private static readonly int interruptionsTimerPeriod = 120000;
         private static readonly int messageQueueTimerPeriod = 240000;
+        // \SD\ is a root folder of microSD card
         private static readonly string emailMessageQueueFilePath = @"\SD\EmailMessages.csv";
         private static readonly string smsMessageQueueFilePath = @"\SD\SmsMessages.csv";
-        private static readonly string loggerMessageQueueFilePath = @"\SD\SecureRoom.log";
+        private static readonly string loggerFilePath = @"\SD\SecureRoom.log";
 
         public static string EmailMessageQueueFilePath
         {
@@ -32,9 +38,9 @@ namespace SecureRoom.Config
             get { return smsMessageQueueFilePath; }
         }
 
-        public static string LoggerMessageQueueFilePath
+        public static string LoggerFilePath
         {
-            get { return loggerMessageQueueFilePath; }
+            get { return loggerFilePath; }
         }
  
         public static int InterruptionsTimerPeriod
@@ -64,7 +70,7 @@ namespace SecureRoom.Config
 
         public static string SmtpPassword
         {
-            get { return Settings.smtpPassword; }
+            get { return smtpPassword; }
         }
  
         public static string SmtpServer

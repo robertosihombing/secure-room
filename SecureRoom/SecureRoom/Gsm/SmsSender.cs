@@ -8,6 +8,9 @@ using SecureRoom.Domain;
 
 namespace SecureRoom.Gsm
 {
+    /// <summary>
+    /// Class that wraps all the GSM related code for sending messages
+    /// </summary>
     public class SmsSender : ISender
     {
         static SerialPort serialPort;
@@ -16,6 +19,8 @@ namespace SecureRoom.Gsm
         private static byte[] buffer = new Byte[bufferMax];
         private static string output = "";
 
+        // default options work almost in every case
+        // but it is better to allow some customization
         public SmsSender(string portName = SerialPorts.COM1, int baudRate = 19200, Parity parity = Parity.None, int dataBits = 8, StopBits stopBits = StopBits.One)
         {
             serialPort = new SerialPort(portName, baudRate, parity, dataBits, stopBits);
@@ -68,6 +73,9 @@ namespace SecureRoom.Gsm
         public void Send(string to, Message message)
         {
             PrintLine("AT+CMGF=1");
+            // those Thread Sleeps are imortant
+            // it's bad for the device to send all the commands immidiately
+            // and could cause some errors
             Thread.Sleep(100);
             PrintLine("AT+CMGS=\"" + to + "\"");
             Thread.Sleep(100);

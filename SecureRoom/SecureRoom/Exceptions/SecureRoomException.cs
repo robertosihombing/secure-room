@@ -3,6 +3,9 @@ using Microsoft.SPOT;
 
 namespace SecureRoom.Exceptions
 {
+    /// <summary>
+    /// It is more convenient to use custom exceptions for app specific errors
+    /// </summary>
     public class SecureRoomException : Exception
     {
         public SecureRoomException()

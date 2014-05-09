@@ -5,6 +5,9 @@ using System.Net.Sockets;
 
 namespace SecureRoom.Ntp
 {
+    /// <summary>
+    /// Encapsulates all NTP related code
+    /// </summary>
     public static class NtpHelper
     {
         public static bool UpdateTimeFromNtpServer(string server, int timeZoneOffset)
@@ -16,6 +19,8 @@ namespace SecureRoom.Ntp
 
                 return true;
             }
+            // there is no need to log the exception details
+            // if the time could be updated it is logged on the upper level
             catch
             {
                 return false;

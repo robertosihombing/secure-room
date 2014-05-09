@@ -5,11 +5,18 @@ using SecureRoom.Exceptions;
 
 namespace SecureRoom.Domain
 {
+    /// <summary>
+    /// Wrapper for the .NET queue class with our necessary functions
+    /// </summary>
     public class StorableMessageQueue : IMessageQueue
     {
         private readonly IMessageQueueRepository messageRepository;
         private Queue internalMessageQueue = new Queue();
-
+        
+        /// <summary>
+        /// Takes repository into constructor, no hard dependencies, so the storage could be replaced
+        /// </summary>
+        /// <param name="messageRepository">Storage implementation for messages</param>
         public StorableMessageQueue(IMessageQueueRepository messageRepository)
         {
             this.messageRepository = messageRepository;

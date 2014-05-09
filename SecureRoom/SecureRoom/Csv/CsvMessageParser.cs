@@ -5,8 +5,16 @@ using SecureRoom.Exceptions;
 
 namespace SecureRoom.Csv
 {
+    /// <summary>
+    /// Used for reading messages is CSV file format
+    /// </summary>
     public class CsvMessageParser : IMessageParser
     {
+        /// <summary>
+        /// Builds Message object from a single string of CSV text.
+        /// </summary>
+        /// <param name="textInCsvFormat">String of CSV text</param>
+        /// <returns>Message object</returns>
         public Message Parse(string textInCsvFormat)
         {
             string[] messageDetails = textInCsvFormat.Split(',');

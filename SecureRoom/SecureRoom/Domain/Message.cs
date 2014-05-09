@@ -3,8 +3,12 @@ using Microsoft.SPOT;
 
 namespace SecureRoom.Domain
 {
+    /// <summary>
+    /// Represents in-memory message object
+    /// </summary>
     public class Message
     {
+        // all the properties represented as strings for parsing simplification
         public string Id { get; set; }
         public string Time { get; set; }
         public string Text { get; set; }
@@ -35,6 +39,10 @@ namespace SecureRoom.Domain
             Text = text;
         }
 
+        /// <summary>
+        /// Override of default spring representation to show only necessary data.
+        /// </summary>
+        /// <returns>Message text</returns>
         public override string ToString()
         {
             return Text + " Time: " + Time.ToString() + ".";
