@@ -1,0 +1,1 @@
+Detects room intrusions using PIR motion sensor and Netduino plus and notifies by Email or by SMS via Email-to-SMS gateway.
